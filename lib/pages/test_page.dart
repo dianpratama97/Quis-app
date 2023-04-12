@@ -18,6 +18,36 @@ class TestPage extends StatefulWidget {
 
 class _TestPageState extends State<TestPage> {
   final _controller = CountDownController();
+  int index = 0;
+  int result = 0;
+
+  @override
+  void initState() {
+    print('USERNAME : ' + widget.username);
+    print('QUESTION : ' + widget.questionModel.data.length.toString());
+    super.initState();
+  }
+
+  void navigate(String optionChar) {
+    setState(() {
+      if (optionChar == (widget.questionModel.data[index].correctOption)) {
+        result++;
+      }
+      index++;
+
+      if (index == widget.questionModel.data.length) {
+        Navigator.of(context)
+            .push(MaterialPageRoute(
+                builder: (context) => ResultPage(
+                      result: result,
+                    )))
+            .then((value) {
+          setState(() {});
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +61,7 @@ class _TestPageState extends State<TestPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "1/ " + widget.questionModel.data.length.toString(),
+                  '${index + 1} /  + ${widget.questionModel.data.length.toString()}',
                   style:
                       GoogleFonts.montserrat(fontSize: 24, color: Colors.white),
                 ),
@@ -51,9 +81,18 @@ class _TestPageState extends State<TestPage> {
               valueColor: Color.fromARGB(255, 252, 0, 0),
               backgroundColor: Colors.white,
               initialPosition: 0,
-              duration: 60,
+              duration: 10,
               text: 'DETIK',
-              onComplete: () => null,
+              onComplete: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(
+                        builder: (context) => ResultPage(
+                              result: result,
+                            )))
+                    .then((value) {
+                  setState(() {});
+                });
+              },
             ),
           ),
           SizedBox(
@@ -62,7 +101,7 @@ class _TestPageState extends State<TestPage> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              "3 + 5 =",
+              widget.questionModel.data[index].question,
               textAlign: TextAlign.center,
               style: GoogleFonts.montserrat(fontSize: 24, color: Colors.white),
             ),
@@ -72,38 +111,39 @@ class _TestPageState extends State<TestPage> {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => ResultPage()));
+              navigate("a");
             },
             child: OptionWidget(
-              color: Color.fromARGB(255, 0, 121, 196),
-              optionChar: "A",
-              optionDetail: "1234",
-            ),
+                color: Color.fromARGB(255, 0, 121, 196),
+                optionChar: "A",
+                optionDetail: widget.questionModel.data[index].optionA),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              navigate("b");
+            },
             child: OptionWidget(
-              color: Color.fromARGB(255, 0, 121, 196),
-              optionChar: "B",
-              optionDetail: "1234",
-            ),
+                color: Color.fromARGB(255, 0, 121, 196),
+                optionChar: "B",
+                optionDetail: widget.questionModel.data[index].optionB),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              navigate("c");
+            },
             child: OptionWidget(
-              color: Color.fromARGB(255, 0, 121, 196),
-              optionChar: "C",
-              optionDetail: "1234",
-            ),
+                color: Color.fromARGB(255, 0, 121, 196),
+                optionChar: "C",
+                optionDetail: widget.questionModel.data[index].optionC),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              navigate("d");
+            },
             child: OptionWidget(
-              color: Color.fromARGB(255, 0, 121, 196),
-              optionChar: "D",
-              optionDetail: "1234",
-            ),
+                color: Color.fromARGB(255, 0, 121, 196),
+                optionChar: "D",
+                optionDetail: widget.questionModel.data[index].optionD),
           ),
         ],
       )),

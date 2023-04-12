@@ -4,7 +4,8 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ResultPage extends StatefulWidget {
-  const ResultPage({super.key});
+  final int result;
+  const ResultPage({super.key, required this.result});
 
   @override
   State<ResultPage> createState() => _ResultPageState();
@@ -25,7 +26,7 @@ class _ResultPageState extends State<ResultPage> {
             ),
             SizedBox(height: 20),
             Text(
-              "Nilai Kamu 2",
+              "Jumlah Benar :" + widget.result.toString(),
               style: GoogleFonts.montserrat(fontSize: 24),
             )
           ],

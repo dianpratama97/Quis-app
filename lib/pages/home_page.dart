@@ -15,8 +15,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late QuestionModel questions;
-
   TextEditingController usenameController = TextEditingController();
+
   final String url =
       "https://script.google.com/macros/s/AKfycbxXQ2dSt1v70PDTizpCRR2WPVSRppKgikF85GQBQyhN4qEJreuJzepHgQlBI3Fl1o6Y/exec";
   void getAllData(String username) async {
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 73, 205, 2),
+      backgroundColor: Color.fromARGB(255, 127, 2, 205),
       body: SafeArea(
           child: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 getAllData(usenameController.text);
               },
-              child: Text("Mulai Ujian"))
+              child: Text("M U L A I"))
         ]),
       )),
     );
